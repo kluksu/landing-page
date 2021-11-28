@@ -1,38 +1,136 @@
+* {
+  direction: ltr;
+  box-sizing: border-box;
+}
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.about {
+  padding: 30px 20px 30px 20px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  background: rgb(248 200 200);
+  background-image: url("https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+}
+.connectComponent {
+  margin-top: 20px;
+  max-width: 600px !important;
+  background: rgba(255, 255, 255, 0.938);
+  border-radius: 10px;
+  border: 1px outset;
+  padding: 20px 30px 50px 30px !important;
+}
+.contactPage {
+  background-image: url("https://images.pexels.com/photos/7014946/pexels-photo-7014946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 100%;
+  background-position: top;
+  /* padding: 50px; */
+  padding-top: 50px;
+  padding-bottom: 100px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+element.style {
+}
+.pricingPage {
+  padding: 30px;
+  background-color: #daeef4;
+}
+.priceTablesGallery {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.priceTabel > .ribua > .btn {
+  /* margin-top: 30px; */
+  font-weight: 600;
+  margin-top: 50px;
+  width: 100%;
+}
+.priceTabel {
+  width: 300px;
+  /* height: fit-content; */
+  transition: transform 0.2s; /* Animation */
+}
+.priceTabel:hover {
+  transform: translateX(-30px) scale(1.1);
+  /* transform: scale(1.1); */
+  cursor: pointer; /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  /* margin: 30px; */
+}
+
+.list-group-flush > .list-group-item {
+  border-width: 0 0 1px;
+  text-align: left;
+}
+.contactPage > h1 {
+  font-weight: 900;
+  max-width: 600px;
+  margin: auto;
+}
+.round {
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  font-size: 50px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.FormRejects {
+  color: red;
+  font-weight: 800;
+  font-size: large;
+}
+.ribua {
+  margin: auto;
+  border: 1px outset gray;
+  /* margin:10px; */
+  background-color: rgb(255, 255, 255);
+  /* border-radius: 10px; */
+  padding: 10px;
+  min-width: 250px;
+}
+#g-recaptcha > div:first-of-type {
+  margin: auto;
+}
+.about .col-xl-4:nth-of-type(3) .ribua {
+  margin-top: 80px;
+}
+.about .col-xl-4:nth-of-type(2) .ribua {
+  margin-top: 160px;
 }
 
-.App-link {
-  color: #61dafb;
+.homePage > p {
+  font-size: 16px;
+  font-weight: 900;
+  padding: 20px 13%;
+}
+.bg-dark {
+  height: 92px;
+  font-size: x-large;
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.homePage {
+  background-image: url("https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  min-height: 100vh;
+  max-height: fit-content;
+}
+.carousel.slide {
+  width: 50%;
+  margin: auto;
+  height: 400px;
 }
