@@ -34,46 +34,58 @@ export const sendEmailToMe = (
     "user_luCcUIntINSgugJfQeWCK"
   );
 };
-export const mokeUp = {
-  free: {
-    valueFeatures: {
-      users: 1,
-      clients: 5,
+export const mokeUp = [
+  {
+    free: {
+      valueFeatures: {
+        users: 1,
+        clients: 5,
 
-      hourse: 10,
+        hourse: 10,
+      },
+      features: [
+        "free customer service",
+        "unlimited items",
+        "unlimited users",
+        "online chat service",
+      ],
     },
-    features: [
-      "free customer service",
-      "unlimited items",
-      "unlimited users",
-      "online chat service",
-    ],
+    price: "0$",
   },
-  basic: {
-    valueFeatures: {
-      users: 2,
-      clients: 10,
+  {
+    basic: {
+      valueFeatures: {
+        users: 2,
+        clients: 10,
 
-      hourse: 100,
+        hourse: 100,
+      },
+      features: ["unlimited items", "unlimited users", "online chat service"],
     },
-    features: ["unlimited items", "unlimited users", "online chat service"],
+    price: "20$",
   },
-  standart: {
-    valueFeatures: {
-      users: 3,
-      clients: 100,
+  {
+    standart: {
+      valueFeatures: {
+        users: 3,
+        clients: 100,
 
-      hourse: 1000,
+        hourse: 1000,
+      },
+      features: ["unlimited users", "online chat service"],
     },
-    features: ["unlimited users", "online chat service"],
+    price: "500$",
   },
-  primium: {
-    valueFeatures: {
-      users: 4,
-      clients: "unlimited",
+  {
+    primium: {
+      valueFeatures: {
+        users: 4,
+        clients: "unlimited",
 
-      hourse: "unlimited",
+        hourse: "unlimited",
+      },
+      features: ["online chat service"],
     },
-    features: ["online chat service"],
+    price: "1000$",
   },
-};
+];

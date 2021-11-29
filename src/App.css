@@ -5,6 +5,24 @@
 .App {
   text-align: center;
 }
+.sideForm {
+  position: absolute;
+  width: 20px;
+  background-color: rgb(250, 250, 250);
+  height: 100%;
+  transition: width 0.5s;
+  overflow: hidden;
+  padding: 30px;
+  /* transform: transition 0.2s; */
+}
+.sideForm:hover {
+  width: 250px;
+  z-index: 1000;
+}
+.sideForm form {
+  min-width: 200px;
+}
+
 .about {
   padding: 30px 20px 30px 20px;
   padding-top: 30px;
@@ -69,6 +87,28 @@ element.style {
 .list-group-flush > .list-group-item {
   border-width: 0 0 1px;
   text-align: left;
+}
+th {
+  font-size: 36px;
+  background-color: #d5d5ff !important;
+}
+td {
+  font-weight: 700;
+  border-bottom: 0.1px solid gray !important;
+  height: 58px;
+  font-size: 21px;
+}
+tr:nth-of-type(even) {
+  background-color: #ddf3fa !important;
+}
+tr:nth-of-type(odd) {
+  background-color: #c6e7e7 !important;
+}
+tr > td:first-of-type {
+  background-color: #d5d5ff !important;
+}
+.table > :not(:first-child) {
+  border-top: 0px solid !important;
 }
 .contactPage > h1 {
   font-weight: 900;

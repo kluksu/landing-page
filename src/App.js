@@ -10,6 +10,7 @@ import Contact from "./pages/Contact";
 import { init } from "emailjs-com";
 import Pricing from "./pages/Pricing";
 import { mokeUp } from "./components/utils";
+import SideForm from "./components/SideForm";
 // init("user_luCcUIntINSgugJfQeWCK");
 // import emailjs from 'emailjs-com';
 
@@ -17,6 +18,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pricePageType: "boxes",
       captchaResponse: "",
       modalBottom: "",
       modalText: "",
@@ -24,8 +26,34 @@ export default class App extends Component {
       isGenericModalOpen: false,
       isRealUser: false,
       selectedPlan: "",
+      windowWidth: "",
+      windowHeight: "",
     };
   }
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.state.pricePageType !== prevState.pricePageType) {
+      console.log(this.state.pageType);
+    }
+  };
+  getFormState = (event, state) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  updateDimensions = () => {
+    this.setState({
+      windowWidth: window.innerWidth,
+      windowHeight: window.innerHeight,
+    });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
   closeGenericModal = () => {
     this.setState({ modalText: "" });
     this.setState({ modalTop: "" });
@@ -78,9 +106,11 @@ please get back to me`,
     return (
       <div className="App">
         <MyNavBar></MyNavBar>
+        <SideForm getFormState={this.getFormState}></SideForm>
         <HashRouter>
           <Routes>
             <Route exact path="/" element={<Home></Home>}></Route>
+
             <Route exact path="/about" element={<About></About>}></Route>
             <Route
               exact
@@ -105,7 +135,8 @@ please get back to me`,
               element={
                 <Pricing
                   getPlaneTypeAndGoToForm={this.getPlaneTypeAndGoToForm}
-                  pageType="table"
+                  pageType={this.state.pricePageType}
+                  windowWidth={this.state.windowWidth}
                 >
                   pricing
                 </Pricing>
