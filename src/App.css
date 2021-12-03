@@ -9,14 +9,19 @@
   position: absolute;
   width: 20px;
   background-color: rgb(250, 250, 250);
-  height: 100%;
+  /* height: ; */
+  min-height: 100%;
   transition: width 0.5s;
   overflow: hidden;
   padding: 30px;
   /* transform: transition 0.2s; */
 }
+.sideFormOpen {
+  width: 300px;
+  z-index: 1000;
+}
 .sideForm:hover {
-  width: 250px;
+  width: 300px;
   z-index: 1000;
 }
 .sideForm form {
@@ -87,6 +92,14 @@ element.style {
 .list-group-flush > .list-group-item {
   border-width: 0 0 1px;
   text-align: left;
+  background: none;
+}
+.changable {
+}
+.changable:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+  transition: transform 0.2s; /* Animation */
 }
 th {
   font-size: 36px;

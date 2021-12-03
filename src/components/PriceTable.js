@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import Ribua from "./Ribua";
 import { FcCheckmark, FcCancel, FcInfo } from "react-icons/fc";
+import { shake } from "./utils";
 
 export default class PriceTable extends Component {
   render() {
     let valueFeaturesArr = [];
     Object.entries(this.props.valueFeatures).forEach((feature) => {
-      console.log(feature);
       valueFeaturesArr.push(
         <ListGroup.Item action>
           {" "}
@@ -31,15 +31,28 @@ export default class PriceTable extends Component {
       );
     });
     return (
-      <div className="priceTabel">
+      <div
+        className="priceTabel"
+        style={{ background: this.props.pricePageBackground }}
+      >
         <Ribua
           height={this.props.height}
           maxWidth={this.props.maxWidth}
-          background={this.props.background}
+          background={this.props.pricingBoxesBackground}
           text={
             <>
-              <h1>{this.props.headline}</h1>
-              <h1>{this.props.price}</h1>
+              <h1
+                className={`changable ${
+                  this.props.selectedElement === "priceBoxHeadline" ? shake : ""
+                }`}
+                onClick={() => this.props.selectElement("priceBoxHeadline")}
+                style={this.props.priceBoxHeadline}
+              >
+                {this.props.headline}
+              </h1>
+              <h1 style={{ color: this.props.pricingBoxesPrice }}>
+                {this.props.price}
+              </h1>
               <ListGroup variant="flush">
                 {" "}
                 {valueFeaturesArr}

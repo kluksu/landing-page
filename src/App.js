@@ -9,7 +9,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { init } from "emailjs-com";
 import Pricing from "./pages/Pricing";
-import { mokeUp } from "./components/utils";
+import { mokeUp, shake } from "./components/utils";
 import SideForm from "./components/SideForm";
 // init("user_luCcUIntINSgugJfQeWCK");
 // import emailjs from 'emailjs-com';
@@ -18,6 +18,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      sideFormOpen: true,
+      color: "",
+      fontSize: "",
+      background: "",
       pricePageType: "boxes",
       captchaResponse: "",
       modalBottom: "",
@@ -28,11 +32,95 @@ export default class App extends Component {
       selectedPlan: "",
       windowWidth: "",
       windowHeight: "",
+      pricePageHeadline: { fontSize: "", color: "" },
+      priceBoxHeadline: { fontSize: "", color: "", background: "" },
+      selectedElement: "priceBoxHeadline",
+      // pricePageBackground: "",
+      // pricingBoxesBackground: "",
+      // pricingBoxesHeadline: "",
+      // pricingBoxesPrice: "",
+      // navBarBackgroundColor: "",
+      // navBarFontColor: "",
     };
   }
+  shake = (className) => {
+    return ` ${this.props.selectedElement === className ? shake : ""}`;
+  };
+
+  toggleToolsBar = () => {
+    if (this.state.sideFormOpen === true) {
+      this.setState({ sideFormOpen: false });
+    } else {
+      this.setState({ sideFormOpen: true });
+    }
+  };
+  selectElement = (elementName) => {
+    this.setState({ selectedElement: elementName });
+  };
+  deepEqual = (object1, object2) => {
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+    for (const key of keys1) {
+      const val1 = object1[key];
+      const val2 = object2[key];
+      const areObjects = this.isObject(val1) && this.isObject(val2);
+      if (
+        (areObjects && !this.deepEqual(val1, val2)) ||
+        (!areObjects && val1 !== val2)
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+  isObject = (object) => {
+    return object != null && typeof object === "object";
+  };
+  changeElementColor = (atribute) => {
+    console.log(atribute);
+    this.setState((state) => ({
+      ...state,
+      [state.selectedElement]: {
+        ...state[state.selectedElement],
+        [atribute]: this.state[atribute],
+      },
+    }));
+    console.log(this.state[this.state.selectedElement]);
+  };
+  getState = (state, value) => {
+    this.setState({ [state]: value });
+  };
+  setLocalStorageGenericColor = () => {
+    Object.entries(this.state).forEach((state) => {
+      console.log(JSON.stringify(state[1]));
+
+      localStorage.setItem(state[0], JSON.stringify(state[1]));
+    });
+  };
+  changeElementValue = (prevState, atribute) => {
+    if (this.state[atribute] !== prevState[atribute]) {
+      this.changeElementColor(`${atribute}`);
+      // this.setLocalStorageGenericColor();
+    }
+  };
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.state.pricePageType !== prevState.pricePageType) {
-      console.log(this.state.pageType);
+    this.changeElementValue(prevState, "color");
+    this.changeElementValue(prevState, "fontSize");
+    this.changeElementValue(prevState, "background");
+
+    // if (this.state.color !== prevState.color) {
+    //   this.changeElementColor("color");
+    // }
+    // if (this.state.fontSize !== prevState.fontSize) {
+    //   console.log(this.state.fontSize);
+    //   this.changeElementColor("fontSize");
+    // }
+    // this.changeElementValue(prevState, "color");
+    if (this.deepEqual(this.state, prevState) === false) {
+      this.setLocalStorageGenericColor();
     }
   };
   getFormState = (event, state) => {
@@ -47,7 +135,27 @@ export default class App extends Component {
       windowHeight: window.innerHeight,
     });
   };
+  setStateFromStorage = () => {
+    console.log(this.state);
+    Object.keys(this.state).forEach((state) => {
+      let value = localStorage.getItem(state);
+      console.log(value);
+      value = JSON.parse(value);
+
+      // if (state === "isGenericModalOpen") {
+      //   value = false;
+      // }
+      this.setState({ [state]: value });
+    });
+  };
   componentDidMount() {
+    localStorage.removeItem("state");
+    // this.setStateFromStorage();
+    // let state = localStorage.getItem("state");
+
+    // Object.entries(JSON.parse(state)).forEach((state) => {
+
+    // });
     window.addEventListener("resize", this.updateDimensions);
   }
   componentWillUnmount() {
@@ -69,7 +177,6 @@ export default class App extends Component {
   };
   verifyCallback = (response) => {
     if (response) {
-      console.log(response);
       this.setState({ captchaResponse: response });
       this.setState({ isRealUser: true });
       setTimeout(
@@ -83,9 +190,7 @@ export default class App extends Component {
       this.setState({ isRealUser: false });
     }
   };
-  reCaptchaLoded = () => {
-    console.log("reacptcha has loaded");
-  };
+  reCaptchaLoded = () => {};
   handleVerified = () => {
     if (this.state.isRealUser === true) {
       alert("ok");
@@ -103,10 +208,22 @@ please get back to me`,
     window.location.assign("/#/contact");
   };
   render() {
+    console.log(this.state.fontSize);
     return (
       <div className="App">
-        <MyNavBar></MyNavBar>
-        <SideForm getFormState={this.getFormState}></SideForm>
+        <MyNavBar
+        // navBarBackgroundColor={this.state.navBarBackgroundColor}
+        // navBarFontColor={this.state.navBarFontColor}
+        ></MyNavBar>
+        <SideForm
+          priceBoxHeadline={this.state.priceBoxHeadline}
+          toggleToolsBar={this.toggleToolsBar}
+          sideFormOpen={this.state.sideFormOpen}
+          selectedElement={this.state.selectedElement}
+          pricePageHeadline={this.state.pricePageHeadline}
+          getState={this.getState}
+          handleChange={this.handleChange}
+        ></SideForm>
         <HashRouter>
           <Routes>
             <Route exact path="/" element={<Home></Home>}></Route>
@@ -134,6 +251,11 @@ please get back to me`,
               path="/pricing"
               element={
                 <Pricing
+                  priceBoxHeadline={this.state.priceBoxHeadline}
+                  pricePageHeadline={this.state.pricePageHeadline}
+                  shake={this.shake}
+                  selectedElement={this.state.selectedElement}
+                  selectElement={this.selectElement}
                   getPlaneTypeAndGoToForm={this.getPlaneTypeAndGoToForm}
                   pageType={this.state.pricePageType}
                   windowWidth={this.state.windowWidth}

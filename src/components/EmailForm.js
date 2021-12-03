@@ -34,7 +34,7 @@ export default class EmailForm extends Component {
         this.state.subject !== "" &&
         this.state.message !== ""
       ) {
-        //   e.preventDefault(); 
+        //   e.preventDefault();
 
         //   emailjs
         //     .sendForm(
@@ -66,13 +66,11 @@ export default class EmailForm extends Component {
                 חזור לעמוד הראשי{" "}
               </Button>
             );
-            console.log(result.text);
           },
           (error) => {
             this.setState({
               errorMessage: "אופס, יש תקלה, אנא נסה שנית מאוחר יותר",
             });
-            console.log(error.text);
           }
         );
       } else {
@@ -84,10 +82,14 @@ export default class EmailForm extends Component {
       this.setState({ errorMessage: "בבקשה אשר שאינך רובוט" });
     }
   };
- componentDidMount=()=>{
-   if(this.props.selectedPlan){
-   this.setState({subject:this.props.selectedPlan,message:this.props.selectedPlanMessage})
- }}
+  componentDidMount = () => {
+    if (this.props.selectedPlan) {
+      this.setState({
+        subject: this.props.selectedPlan,
+        message: this.props.selectedPlanMessage,
+      });
+    }
+  };
   render() {
     return (
       <Container
@@ -103,7 +105,6 @@ export default class EmailForm extends Component {
               placeholder=""
               name="subject"
               value={this.state.subject}
-              
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -146,9 +147,7 @@ export default class EmailForm extends Component {
               rows={4}
               placeholder=""
               name="message"
-              value={
-               this.state.message
-              }
+              value={this.state.message}
             />
           </Form.Group>
           <Recaptcha
@@ -159,7 +158,7 @@ export default class EmailForm extends Component {
           />
           <p className="FormRejects ">{this.state.errorMessage}</p>
           <Button onClick={this.sendEmail} className="w-100" type="button">
-           submit
+            submit
           </Button>
         </Form>
       </Container>

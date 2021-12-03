@@ -89,3 +89,4 @@ export const mokeUp = [
     price: "1000$",
   },
 ];
+export let shake = "animate__animated animate__headShake	 animate__slow";
