@@ -36,6 +36,12 @@ export default class PriceTable extends Component {
         style={{ background: this.props.pricePageBackground }}
       >
         <Ribua
+                    selectedElement={this.props.selectedElement}
+
+                          selectElement={this.props.selectElement}
+
+                    priceBox={this.props.priceBox}
+
           height={this.props.height}
           maxWidth={this.props.maxWidth}
           background={this.props.pricingBoxesBackground}

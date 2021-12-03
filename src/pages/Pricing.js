@@ -23,6 +23,7 @@ export default class Pricing extends Component {
         }
         boxesArr.push(
           <PriceTable
+            priceBox={this.props.priceBox}
             priceBoxHeadline={this.props.priceBoxHeadline}
             selectedElement={this.props.selectedElement}
             selectElement={this.props.selectElement}
@@ -39,7 +40,11 @@ export default class Pricing extends Component {
         );
       });
       return (
-        <div className="pricingPage">
+        <div
+          className=" pricingPage"
+          // onClick={() => this.props.selectElement("pricePageBackground")}
+          style={this.props.pricePageBackground}
+        >
           <h1
             className={`changable ${
               this.props.selectedElement === "pricePageHeadline" ? shake : ""

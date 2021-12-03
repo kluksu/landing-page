@@ -7,18 +7,41 @@ export default class SideForm extends Component {
     super(props);
     this.state = {
       color: "#fff",
+      background: "#fff",
     };
   }
   componentDidUpdate(prevProps, PrevState) {
     if (this.state.color !== PrevState.color) {
       this.props.getState("color", this.state.color);
     }
+    if (this.state.background !== PrevState.background) {
+      this.props.getState("background", this.state.background);
+    }
   }
 
   handleChangeComplete = (color) => {
     this.setState({ color: color.hex });
   };
+  handleChangeCompleteBackground = (background) => {
+    this.setState({ background: background.hex });
+  };
   render() {
+    let selectedElementAtributes = Object.keys(
+      this.props[this.props.selectedElement]
+    );
+    let backgroundScheme = selectedElementAtributes.includes("background") ? (
+      <ChromePicker
+        color={this.state.background}
+        onChange={this.handleChangeCompleteBackground}
+      />
+    ) : null;
+    let fontScheme = selectedElementAtributes.includes("color") ? (
+      <ChromePicker
+        color={this.state.color}
+        onChange={this.handleChangeComplete}
+      />
+    ) : null;
+
     let sideFormOpen = this.props.sideFormOpen === true ? "sideFormOpen" : "";
     let sideFormToggleButton =
       this.props.sideFormOpen === true ? (
@@ -37,9 +60,21 @@ export default class SideForm extends Component {
     let pricePageHeadlineOptionsArr = Object.keys(
       this.props[this.props.selectedElement]
     ).map((atribute) => {
-      console.log(this.props.pricePageHeadline);
       return <option value={atribute}>{`${atribute}`}</option>;
     });
+    let fontSizeForm = selectedElementAtributes.includes("fontSize") ? (
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label> font size</Form.Label>
+        <Form.Select
+          aria-label="Default select example"
+          type="select"
+          name="fontSize"
+          onChange={(event) => this.props.handleChange(event)}
+        >
+          {hundredSizes}{" "}
+        </Form.Select>
+      </Form.Group>
+    ) : null;
     return (
       <div className={` sideForm ${sideFormOpen}  `}>
         <Form>
@@ -77,6 +112,11 @@ export default class SideForm extends Component {
             >
               <option value={"pricePageHeadline"}> price page headline</option>
               <option value={"priceBoxHeadline"}> price box headline</option>
+              <option value={"priceBox"}> price box background</option>
+              <option value={"pricePageBackground"}>
+                {" "}
+                price page background
+              </option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -89,22 +129,11 @@ export default class SideForm extends Component {
               {pricePageHeadlineOptionsArr}{" "}
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label> font size</Form.Label>
-            <Form.Select
-              aria-label="Default select example"
-              type="select"
-              name="fontSize"
-              onChange={(event) => this.props.handleChange(event)}
-            >
-              {hundredSizes}{" "}
-            </Form.Select>
-          </Form.Group>
+          {fontSizeForm}
           color
-          <ChromePicker
-            color={this.state.color}
-            onChange={this.handleChangeComplete}
-          />
+          {fontScheme}
+          background color
+          {backgroundScheme}
         </Form>
       </div>
     );

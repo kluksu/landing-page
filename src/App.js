@@ -34,8 +34,9 @@ export default class App extends Component {
       windowHeight: "",
       pricePageHeadline: { fontSize: "", color: "" },
       priceBoxHeadline: { fontSize: "", color: "", background: "" },
+      priceBox: { background: "" },
       selectedElement: "priceBoxHeadline",
-      // pricePageBackground: "",
+      pricePageBackground: { background: "" },
       // pricingBoxesBackground: "",
       // pricingBoxesHeadline: "",
       // pricingBoxesPrice: "",
@@ -106,6 +107,7 @@ export default class App extends Component {
       // this.setLocalStorageGenericColor();
     }
   };
+
   componentDidUpdate = (prevProps, prevState) => {
     this.changeElementValue(prevState, "color");
     this.changeElementValue(prevState, "fontSize");
@@ -127,6 +129,8 @@ export default class App extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleChange = (event) => {
+    this.updateDimensions();
+
     this.setState({ [event.target.name]: event.target.value });
   };
   updateDimensions = () => {
@@ -216,6 +220,8 @@ please get back to me`,
         // navBarFontColor={this.state.navBarFontColor}
         ></MyNavBar>
         <SideForm
+          pricePageBackground={this.state.pricePageBackground}
+          priceBox={this.state.priceBox}
           priceBoxHeadline={this.state.priceBoxHeadline}
           toggleToolsBar={this.toggleToolsBar}
           sideFormOpen={this.state.sideFormOpen}
@@ -251,6 +257,8 @@ please get back to me`,
               path="/pricing"
               element={
                 <Pricing
+                  pricePageBackground={this.state.pricePageBackground}
+                  priceBox={this.state.priceBox}
                   priceBoxHeadline={this.state.priceBoxHeadline}
                   pricePageHeadline={this.state.pricePageHeadline}
                   shake={this.shake}
