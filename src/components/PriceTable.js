@@ -36,12 +36,9 @@ export default class PriceTable extends Component {
         style={{ background: this.props.pricePageBackground }}
       >
         <Ribua
-                    selectedElement={this.props.selectedElement}
-
-                          selectElement={this.props.selectElement}
-
-                    priceBox={this.props.priceBox}
-
+          selectedElement={this.props.selectedElement}
+          selectElement={this.props.selectElement}
+          priceBox={this.props.priceBox}
           height={this.props.height}
           maxWidth={this.props.maxWidth}
           background={this.props.pricingBoxesBackground}
@@ -51,12 +48,18 @@ export default class PriceTable extends Component {
                 className={`changable ${
                   this.props.selectedElement === "priceBoxHeadline" ? shake : ""
                 }`}
-                onClick={() => this.props.selectElement("priceBoxHeadline")}
+                onClick={(e) => this.props.selectElement(e, "priceBoxHeadline")}
                 style={this.props.priceBoxHeadline}
               >
                 {this.props.headline}
               </h1>
-              <h1 style={{ color: this.props.pricingBoxesPrice }}>
+              <h1
+                className={`changable ${
+                  this.props.selectedElement === "pricePagePrice" ? shake : ""
+                }`}
+                style={this.props.pricePagePrice}
+                onClick={(e) => this.props.selectElement(e, "pricePagePrice")}
+              >
                 {this.props.price}
               </h1>
               <ListGroup variant="flush">

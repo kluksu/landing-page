@@ -37,6 +37,7 @@ export default class App extends Component {
       priceBox: { background: "" },
       selectedElement: "priceBoxHeadline",
       pricePageBackground: { background: "" },
+      pricePagePrice: { color: "", fontSize: "" },
       // pricingBoxesBackground: "",
       // pricingBoxesHeadline: "",
       // pricingBoxesPrice: "",
@@ -55,9 +56,11 @@ export default class App extends Component {
       this.setState({ sideFormOpen: true });
     }
   };
-  selectElement = (elementName) => {
+  selectElement = (e, elementName) => {
+    e.stopPropagation();
     this.setState({ selectedElement: elementName });
   };
+
   deepEqual = (object1, object2) => {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
@@ -220,6 +223,7 @@ please get back to me`,
         // navBarFontColor={this.state.navBarFontColor}
         ></MyNavBar>
         <SideForm
+          pricePagePrice={this.state.pricePagePrice}
           pricePageBackground={this.state.pricePageBackground}
           priceBox={this.state.priceBox}
           priceBoxHeadline={this.state.priceBoxHeadline}
@@ -257,6 +261,7 @@ please get back to me`,
               path="/pricing"
               element={
                 <Pricing
+                  pricePagePrice={this.state.pricePagePrice}
                   pricePageBackground={this.state.pricePageBackground}
                   priceBox={this.state.priceBox}
                   priceBoxHeadline={this.state.priceBoxHeadline}

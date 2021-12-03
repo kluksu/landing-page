@@ -116,7 +116,8 @@ export default class SideForm extends Component {
               <option value={"pricePageBackground"}>
                 {" "}
                 price page background
-              </option>
+              </option>{" "}
+              <option value={"pricePagePrice"}> price page price</option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">

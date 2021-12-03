@@ -23,6 +23,7 @@ export default class Pricing extends Component {
         }
         boxesArr.push(
           <PriceTable
+            pricePagePrice={this.props.pricePagePrice}
             priceBox={this.props.priceBox}
             priceBoxHeadline={this.props.priceBoxHeadline}
             selectedElement={this.props.selectedElement}
@@ -41,15 +42,15 @@ export default class Pricing extends Component {
       });
       return (
         <div
-          className=" pricingPage"
-          // onClick={() => this.props.selectElement("pricePageBackground")}
+          className=" pricingPage changableBackground"
+          onClick={(e) => this.props.selectElement(e, "pricePageBackground")}
           style={this.props.pricePageBackground}
         >
           <h1
             className={`changable ${
               this.props.selectedElement === "pricePageHeadline" ? shake : ""
             }`}
-            onClick={() => this.props.selectElement("pricePageHeadline")}
+            onClick={(e) => this.props.selectElement(e, "pricePageHeadline")}
             style={this.props.pricePageHeadline}
           >
             headline

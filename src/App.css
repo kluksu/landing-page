@@ -101,6 +101,14 @@ element.style {
   cursor: pointer;
   transition: transform 0.2s; /* Animation */
 }
+.changableBackground {
+}
+.changableBackground:hover {
+  cursor: pointer;
+}
+/* *:hover {
+  cursor: not-allowed;
+} */
 th {
   font-size: 36px;
   background-color: #d5d5ff !important;
